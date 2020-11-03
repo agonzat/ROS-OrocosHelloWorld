@@ -1,0 +1,8 @@
+require("print");        // necessary for 'print.ln'
+import("HelloWorld");    // 'HelloWorld' is a directory name to import
+
+print.ln("Script imported HelloWorld package:");
+displayComponentTypes(); // Function of the DeploymentComponent
+
+loadComponent("Hello", "HelloWorld"); // Creates a new component of type 'HelloWorld'
+print.ln("Script created Hello Component with period: " + Hello.getPeriod());
