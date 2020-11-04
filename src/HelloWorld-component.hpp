@@ -12,4 +12,5 @@ class HelloWorld : public RTT::TaskContext{
     void stopHook();
     void cleanupHook();
 };
+
 #endif

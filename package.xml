@@ -1,4 +1,4 @@
-<package>
+<package format="2">
   <name>HelloWorld</name>
   <version>0.1.0</version>
   <license>BSD</license>
@@ -13,14 +13,17 @@
   <build_depend>rtt</build_depend>
   <build_depend>ocl</build_depend>
   <build_depend>rtt_ros</build_depend>
-
-  <run_depend>rtt</run_depend>
-  <run_depend>ocl</run_depend>
-  <run_depend>rtt_ros</run_depend>
+  
+  <exec_depend>rtt</exec_depend>
+  <exec_depend>ocl</exec_depend>
+  <exec_depend>rtt_ros</exec_depend>
 
   <!-- ROS Msg Typekits and Srv Proxies -->
   <build_depend>rtt_sensor_msgs</build_depend>
-  <run_depend>rtt_sensor_msgs</run_depend>
+  <exec_depend>rtt_sensor_msgs</exec_depend>
+
+  <depend>roscpp</depend>
+  <depend>std_msgs</depend>
 
   <export>
     <rtt_ros>

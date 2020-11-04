@@ -14,6 +14,8 @@ project(HelloWorld)
 # Find the RTT-ROS package (this transitively includes the Orocos CMake macros)
 find_package(catkin REQUIRED COMPONENTS
   rtt_ros
+  roscpp
+  std_msgs
   # ADDITIONAL ROS PACKAGES
   )
 
@@ -23,7 +25,8 @@ include_directories(${catkin_INCLUDE_DIRS})
 
 # orocos_component(my_component src/my_component.cpp)
 # target_link_libraries(my_component ${catkin_LIBRARIES} ${USE_OROCOS_LIBRARIES})
-orocos_component(HelloWorld src/HelloWorld-component.cpp)
+orocos_component(HelloWorld 
+      src/HelloWorld-component.cpp)
 target_link_libraries(HelloWorld ${catkin_LIBRARIES} ${USE_OROCOS_LIBRARIES})
 
 # orocos_library(my_library src/my_library.cpp)
@@ -42,10 +45,13 @@ target_link_libraries(HelloWorld-plugin ${catkin_LIBRARIES} ${USE_OROCOS_LIBRARI
 # orocos_typekit(my_typekit src/my_typekit.cpp)
 # target_link_libraries(my_typekit ${catkin_LIBRARIES} ${USE_OROCOS_LIBRARIES})
 
+add_executable(deployment_test src/deployment_node.cpp)
+target_link_libraries(deployment_test ${catkin_LIBRARIES} ${USE_OROCOS_LIBRARIES} HelloWorld)
+
+
 ### Orocos Package Exports and Install Targets ###
 
 # Generate install targets for header files
-
 orocos_install_headers(DIRECTORY include/${PROJECT_NAME})
 
 # Export package information (replaces catkin_package() macro) 
