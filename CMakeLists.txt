@@ -16,7 +16,6 @@ find_package(catkin REQUIRED COMPONENTS
   rtt_ros
   roscpp
   std_msgs
-  # ADDITIONAL ROS PACKAGES
   )
 
 include_directories(${catkin_INCLUDE_DIRS})
@@ -47,7 +46,6 @@ target_link_libraries(HelloWorld-plugin ${catkin_LIBRARIES} ${USE_OROCOS_LIBRARI
 
 add_executable(deployment_test src/deployment_node.cpp)
 target_link_libraries(deployment_test ${catkin_LIBRARIES} ${USE_OROCOS_LIBRARIES} HelloWorld)
-
 
 ### Orocos Package Exports and Install Targets ###
 
