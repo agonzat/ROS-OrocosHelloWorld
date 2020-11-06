@@ -11,6 +11,9 @@ class HelloWorld : public RTT::TaskContext{
     void updateHook();
     void stopHook();
     void cleanupHook();
+
+  private:
+    std::string parameter_txt_;
 };
 
 #endif

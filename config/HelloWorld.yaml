@@ -1,0 +1,3 @@
+HelloWorldNode:
+  HelloWorldComponent:
+    parameter_txt: "Look at this x"

@@ -9,25 +9,34 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
+  <depend>roscpp</depend>
+
   <!-- Build deps are queried automatically with orocos_use_package() -->
   <build_depend>rtt</build_depend>
   <build_depend>ocl</build_depend>
   <build_depend>rtt_ros</build_depend>
+  <build_depend>rtt_rosparam</build_depend>
   
   <exec_depend>rtt</exec_depend>
   <exec_depend>ocl</exec_depend>
   <exec_depend>rtt_ros</exec_depend>
+  <exec_depend>rtt_rosnode</exec_depend> 
+  <exec_depend>rtt_roscomm</exec_depend> 
+  <exec_depend>rtt_rosparam</exec_depend> 
+  <exec_depend>rtt_std_msgs</exec_depend> 
+  <exec_depend>rtt_std_srvs</exec_depend> 
 
   <!-- ROS Msg Typekits and Srv Proxies -->
   <build_depend>rtt_sensor_msgs</build_depend>
   <exec_depend>rtt_sensor_msgs</exec_depend>
 
-  <depend>roscpp</depend>
-  <depend>std_msgs</depend>
-
   <export>
     <rtt_ros>
-      <!-- Plugin deps are loaded automatically by the rtt_ros import service -->
+      <plugin_depend>rtt_rosnode</plugin_depend>
+      <plugin_depend>rtt_roscomm</plugin_depend>
+      <plugin_depend>rtt_rosparam</plugin_depend>
+      <plugin_depend>rtt_std_msgs</plugin_depend>
+      <plugin_depend>rtt_std_srvs</plugin_depend>
       <plugin_depend>rtt_sensor_msgs</plugin_depend>
     </rtt_ros>
   </export>

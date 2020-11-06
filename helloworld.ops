@@ -1,8 +1,9 @@
-require("print");        // necessary for 'print.ln'
-import("HelloWorld");    // 'HelloWorld' is a directory name to import
+import("rtt_ros");
+ros.import("HelloWorld");
 
-print.ln("Script imported HelloWorld package:");
-displayComponentTypes(); // Function of the DeploymentComponent
+loadComponent("HelloWorldComponent", "HelloWorld");
+loadService("HelloWorldComponent","rosparam");
 
-loadComponent("Hello", "HelloWorld"); // Creates a new component of type 'HelloWorld'
-print.ln("Script created Hello Component with period: " + Hello.getPeriod());
+HelloWorldComponent.configure();
+HelloWorldComponent.setPeriod(1);
+HelloWorldComponent.start();

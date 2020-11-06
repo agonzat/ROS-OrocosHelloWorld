@@ -1,31 +1,68 @@
 #include "HelloWorld-component.hpp"
 #include <rtt/Component.hpp>
+#include <rtt_rosparam/rosparam.h>
 #include <iostream>
+#include <ros/ros.h>
+#include <rtt/Logger.hpp>
+
 
 HelloWorld::HelloWorld(std::string const& name) : TaskContext(name){
-  std::cout << "HelloWorld constructed !" <<std::endl;
+	RTT::Logger::In in("HelloWorld");
+
+	this->addProperty("parameter_txt", parameter_txt_);
+
+	RTT::log(RTT::LoggerLevel::Warning) << "HelloWorld constructed !" << RTT::endlog();
 }
 
 bool HelloWorld::configureHook(){
-  std::cout << "HelloWorld configured !" <<std::endl;
-  return true;
+	RTT::Logger::In in("HelloWorld::configure");
+	bool all_params_found = true;
+	
+	boost::shared_ptr<rtt_rosparam::ROSParam> rosparam =
+		this->getProvider<rtt_rosparam::ROSParam>("rosparam");
+
+	// Get the parameters
+	if(rosparam) {
+		// all_params_found &= rosparam->getParam("/Hello/parameter_txt", "parameter_txt");
+		all_params_found &= rosparam->getComponentPrivate("parameter_txt");
+	}
+
+	RTT::log(RTT::LoggerLevel::Warning)
+		<< (all_params_found ? "HelloWorld configured !" : "Could not find all ROS parameters, configure failed")
+		<< RTT::endlog();
+	return all_params_found;
 }
 
 bool HelloWorld::startHook(){
-  std::cout << "HelloWorld started !" <<std::endl;
-  return true;
+	RTT::Logger::In in("HelloWorld::start");
+	RTT::log(RTT::LoggerLevel::Info) << "HelloWorld started !" << RTT::endlog();
+	return true;
 }
 
 void HelloWorld::updateHook(){
-  std::cout << "HelloWorld executes updateHook !" <<std::endl;
+	RTT::Logger::In in("HelloWorld::update");
+	if (!ros::ok())
+		this->error();
+	
+	RTT::log(RTT::LoggerLevel::Info) << "HelloWorld executes updateHook !" << RTT::endlog();
+	RTT::log(RTT::LoggerLevel::Info) << "And now say: " << parameter_txt_ << RTT::endlog();
+
+	static char a = 'x';
+	static char b = 'X';
+	std::swap(a,b);
+	std::replace( parameter_txt_.begin(), parameter_txt_.end(), a, b);
 }
 
 void HelloWorld::stopHook() {
-  std::cout << "HelloWorld executes stopping !" <<std::endl;
+	RTT::Logger::In in("HelloWorld::stop");
+
+	RTT::log(RTT::LoggerLevel::Info) << "HelloWorld executes stopping !" << RTT::endlog();
 }
 
 void HelloWorld::cleanupHook() {
-  std::cout << "HelloWorld cleaning up !" <<std::endl;
+	RTT::Logger::In in("HelloWorld::cleanup");
+
+	RTT::log(RTT::LoggerLevel::Info) << "HelloWorld cleaning up !" << RTT::endlog();
 }
 
 // CALL THIS ONLY ONCE

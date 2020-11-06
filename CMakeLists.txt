@@ -1,13 +1,4 @@
-#
-# The find_package macro for Orocos-RTT requires
-# cmake >= 2.8
-#
 cmake_minimum_required(VERSION 2.8)
-
-#
-# This creates a standard cmake project. You may extend this file with
-# any cmake macro you see fit.
-#
 project(HelloWorld)
 
 ### ROS Dependencies ###
@@ -16,9 +7,12 @@ find_package(catkin REQUIRED COMPONENTS
   rtt_ros
   roscpp
   std_msgs
+  rtt_rosparam
   )
 
 include_directories(${catkin_INCLUDE_DIRS})
+
+orocos_use_package(ocl-deployment)
 
 ### Orocos Targets ###
 
@@ -26,7 +20,7 @@ include_directories(${catkin_INCLUDE_DIRS})
 # target_link_libraries(my_component ${catkin_LIBRARIES} ${USE_OROCOS_LIBRARIES})
 orocos_component(HelloWorld 
       src/HelloWorld-component.cpp)
-target_link_libraries(HelloWorld ${catkin_LIBRARIES} ${USE_OROCOS_LIBRARIES})
+target_link_libraries(HelloWorld ${catkin_LIBRARIES} ${USE_OROCOS_LIBRARIES} ${OROCOS-RTT_RTT-SCRIPTING_LIBRARY})
 
 # orocos_library(my_library src/my_library.cpp)
 # target_link_libraries(my_library ${catkin_LIBRARIES} ${USE_OROCOS_LIBRARIES})
@@ -44,16 +38,13 @@ target_link_libraries(HelloWorld-plugin ${catkin_LIBRARIES} ${USE_OROCOS_LIBRARI
 # orocos_typekit(my_typekit src/my_typekit.cpp)
 # target_link_libraries(my_typekit ${catkin_LIBRARIES} ${USE_OROCOS_LIBRARIES})
 
-add_executable(deployment_test src/deployment_node.cpp)
-target_link_libraries(deployment_test ${catkin_LIBRARIES} ${USE_OROCOS_LIBRARIES} HelloWorld)
-
 ### Orocos Package Exports and Install Targets ###
 
 # Generate install targets for header files
 orocos_install_headers(DIRECTORY include/${PROJECT_NAME})
 
-# Export package information (replaces catkin_package() macro) 
+# Export package information (replaces catkin_package() macro)
 orocos_generate_package(
   INCLUDE_DIRS include
-  DEPENDS rtt_ros
+  DEPENDS rtt_ros ocl-deployment
 )
