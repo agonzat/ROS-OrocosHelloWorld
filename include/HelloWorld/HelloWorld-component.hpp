@@ -14,6 +14,7 @@ class HelloWorld : public RTT::TaskContext{
 
   private:
     std::string parameter_txt_;
+    
 };
 
 #endif

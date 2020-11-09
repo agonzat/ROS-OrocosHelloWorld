@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<launch>
+	<rosparam command="load" file="$(find HelloWorld)/config/HelloWorld.yaml"/>
+	<arg name="component_name" default="HelloWorldComponent"/>
+	<arg name="oro_arch" default="-gnulinux"/>
+	<arg name="connect_to_topics" default="true"/>
+	<node name="HelloWorldNode" pkg="HelloWorld" type="deploy_helloworld$(arg oro_arch)" output="screen" args="--name $(arg component_name)" required="true">
+			<param name="connect_to_topics" value="$(arg connect_to_topics)"/>
+	</node>
+</launch>

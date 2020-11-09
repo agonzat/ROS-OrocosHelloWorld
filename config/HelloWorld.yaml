@@ -1,3 +1,5 @@
 HelloWorldNode:
   HelloWorldComponent:
     parameter_txt: "Look at this x"
+  Hello2:
+    parameter_txt: "Look at this x2"
