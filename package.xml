@@ -1,5 +1,5 @@
 <package format="2">
-  <name>HelloWorld</name>
+  <name>hello_world</name>
   <version>0.1.0</version>
   <license>BSD</license>
   <maintainer email="name@domain.com">Firstname Lastname</maintainer>
